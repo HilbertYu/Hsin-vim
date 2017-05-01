@@ -14,6 +14,9 @@ filetype indent on
 """""""""""""""""""""""""""""""""""""""""""""""
 source ~/.vim/vundle-list.vim
 """""""""""""""""""""""""""""""""""""""""""""""
+filetype on
+filetype plugin on
+filetype indent on
 
 
 "basic
@@ -71,6 +74,8 @@ cnoreabbrev ctags_add  AsyncRun! ctags -R --c++-kinds=+p --fields=+iaS --extra=+
 cnoreabbrev Agc Ag! <C-R><C-W> ./*.c
 
 
+"snipmate custom
+set runtimepath+=~/.vim/snipmate-snippets-custom/
 
 highlight Visual cterm=NONE ctermbg=Blue ctermfg=Cyan guibg=Grey41
 nmap <F12> :w<CR>:make!<CR>:cw<CR> 
