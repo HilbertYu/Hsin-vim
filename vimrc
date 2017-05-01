@@ -12,10 +12,6 @@ filetype indent on
 "execute pathogen#infect()
 
 """""""""""""""""""""""""""""""""""""""""""""""
-
-
-
-
 set nocompatible                " be iMproved
 filetype off                    " required!
 set rtp+=~/.vim/bundle/vundle/
@@ -23,9 +19,6 @@ call vundle#rc()
 
 "let Vundle manage Vundle
 Plugin 'gmarik/vundle'
-"my Plugin here:
-"
-" original repos on github
 "
 Plugin 'will133/vim-dirdiff.git'
 Plugin 'Mizuchi/STL-Syntax.git'
@@ -47,28 +40,9 @@ Plugin 'honza/vim-snippets'
 Plugin 'nathanaelkane/vim-indent-guides.git'
 Plugin 'Lokaltog/vim-powerline'
 
-"Plugin 'kien/ctrlp.vim'
-"Plugin 'sukima/xmledit'
-"Plugin 'sjl/gundo.vim'
-"Plugin 'jiangmiao/auto-pairs'
-"Plugin 'klen/python-mode'
-"Plugin 'Valloric/ListToggle'
-"Plugin 'SirVer/ultisnips'
-"Plugin 'Valloric/YouCompleteMe'
-"Plugin 't9md/vim-quickhl'
-"Plugin 'scrooloose/nerdcommenter'
-"..................................
 " vim-scripts repos
 Plugin 'a.vim'
 Plugin 'grep.vim'
-"Plugin 'DirDiff.vim'
-
-"Plugin 'vcscommand.vim'
-"Plugin 'ShowPairs'
-"Plugin 'SudoEdit.vim'
-"Plugin 'EasyGrep'
-"Plugin 'VOoM'
-"Plugin 'VimIM'
 "..................................
 " non github repos
 " Plugin 'git://git.wincent.com/command-t.git'
