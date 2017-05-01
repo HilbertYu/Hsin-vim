@@ -1,0 +1,58 @@
+snippet mainqt
+	int main(int argc, char **argv)
+	{
+		QApplication app(argc, argv);
+		${1}
+		return app.exec();
+	}
+snippet class
+	class ${1:`Filename('$1', 'name')`} {
+		public:
+			// default constructor
+			$1();
+			// destructor
+			virtual ~$1();
+			// copy constructor
+			$1(const $1 & rhs);
+			// assignment operator
+			$1 & operator = (const $1 & rhs);
+
+		private:
+			${3:/* data_m */}
+	}; /* end of class $1 */
+snippet classqtw
+	class ${1:`Filename('$1', 'name')`}: public QWidget
+	{
+		Q_OBJECT
+		public:
+			$1(QWidget *parent = 0);
+	};
+	$1::$1 (QWidget *parent) : QWidget (parent)
+	{
+
+	}
+snippet try
+	try {
+		${1}
+	}
+snippet catch
+	catch ( ${1:exception} ${2:e} ) {
+		${3}
+	}
+snippet winapp
+	class WinApp : public CWinApp {
+	    public:
+	        BOOL InitInstance()
+	        {
+	            CFrameWnd * frame = new CFrameWnd();
+
+	            this->m_pMainWnd = frame;
+
+	            frame->Create(NULL, L"Hello MFC");
+	            frame->ShowWindow(SW_SHOW);
+
+	            return TRUE;
+	        }
+	}; /* end of class WinApp */
+
+	WinApp winapp;

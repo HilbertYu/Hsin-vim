@@ -1,0 +1,19 @@
+snippet sl
+	###############################################################################
+snippet array
+	my @${1:array} = qw(${2:a b c d});
+snippet hash
+	my %${1:hash} = (${2:"key"}=>${3:"value"});
+snippet open
+	my $filename = '${1:filename}';
+	open(my $fh, '<:encoding(UTF-8)', $filename)
+	  or die "Could not open file '$filename' $!";
+
+	while (my $line = <$fh>) {
+	  chomp $line;
+	  print "$line\n";
+	}
+snippet inc
+	use strict;
+	use warnings;
+	use utf8;

@@ -1,0 +1,262 @@
+snippet ##
+	###############################################################################
+
+snippet C
+	##############################################################
+	.PHONY : clean clean_all
+	##############################################################
+
+	##############################################################
+	# compiler setting
+	##############################################################
+	CC      = gcc
+	CFLAGS  = -g -Wall
+	LIBS    = -lm
+	INCPATH =
+	DIR     = $(shell pwd)
+
+	##############################################################
+	# source files setting
+	##############################################################
+	C_SOURCES = $(shell find . -name "*.c")
+	C_OBJS    = $(patsubst %.c,%.o,$(wildcard $(C_SOURCES)))
+	OBJS      = $(C_OBJS)
+	EXEC      = $(shell basename $(DIR))
+
+
+	all: $(EXEC)
+
+	%.o:%.c
+		$(CC) -c $(CFLAGS) $(INCPATH) $< -o $@
+
+	$(EXEC): $(OBJS)
+		$(CC) $(OBJS) -o $(EXEC) $(LIBS)
+
+	##############################################################
+	clean:
+		@rm -vfr $(OBJS)
+	clean_all: clean
+		@rm -vfr $(EXEC)
+	##############################################################
+
+snippet CPP
+	###############################################################################
+	# compiler setting
+	###############################################################################
+	CC       = gcc
+	CXX      = g++
+	CFLAGS   = -g -Wall
+	CXXFLAGS = $(CFLAGS) -Weffc++
+	LIBS     = -lm
+	INCPATH  =
+	DIR     = $(shell pwd)
+
+	###############################################################################
+	# source files setting
+	###############################################################################
+	C_SOURCES   = $(shell find . -name "*.c")
+	CXX_SOURCES = $(shell find . -name "*.cpp")
+	C_OBJS      = $(patsubst %.c,%.o,$(wildcard $(C_SOURCES)))
+	CXX_OBJS    = $(patsubst %.cpp,%.o,$(wildcard $(CXX_SOURCES)))
+	OBJS        = $(C_OBJS) $(CXX_OBJS)
+	EXEC      = $(shell basename $(DIR))
+
+	###############################################################################
+	.PHONY : clean clean_all
+	###############################################################################
+	all: $(EXEC)
+
+	%.o:%.c
+		$(CC) -c $(CFLAGS) $(INCPATH) $< -o $@
+	%.o:%.cpp
+		$(CXX) -c $(CXXFLAGS) $(INCPATH) $< -o $@
+
+	$(EXEC): $(OBJS)
+		$(CXX) $(OBJS) -o $(EXEC) $(LIBS)
+
+	###############################################################################
+	clean:
+		@rm -vfr $(OBJS)
+	clean_all: clean
+		@rm -vfr $(EXEC)
+	###############################################################################
+
+snippet MSVC
+	MSBUILD=msbuild
+	SLN_FILE=
+	CONFIGURATION=Debug # Release
+	FLAGS=/nologo /v:q /property:GenerateFullPaths=true
+
+	all: build
+
+	build:
+		$(MSBUILD) $(SLN_FILE) /t:Build /p:Configuration=$(CONFIGURATION) $(FLAGS)
+
+	rebuild:
+		$(MSBUILD) $(SLN_FILE) /t:Rebuild /p:Configuration=$(CONFIGURATION) $(FLAGS)
+
+	clean:
+		$(MSBUILD) $(SLN_FILE) /t:Clean /p:Configuration=$(CONFIGURATION) $(FLAGS)
+
+snippet CLIB
+	###############################################################################
+	# compiler setting
+	###############################################################################
+	CC       = gcc
+	CFLAGS   = -g -Wall
+	AR       = ar
+	LIBS     = -lm
+	INCPATH  = -I.
+	DIR      = $(shell pwd)
+	BASENAME = $(shell basename $(DIR))
+
+	###############################################################################
+	# source files setting
+	###############################################################################
+	C_SOURCES   	 = $(shell find . -name "*.c")
+	C_STATIC_OBJS    = $(patsubst %.c,%_static.o,$(wildcard $(C_SOURCES)))
+	C_DYNAMIC_OBJS   = $(patsubst %.c,%_dynamic.o,$(wildcard $(C_SOURCES)))
+	STATIC_OBJS      = $(C_STATIC_OBJS)
+	DYNAMIC_OBJS     = $(C_DYNAMIC_OBJS)
+	LIB_A            = $(BASENAME).a
+	LIB_SO           = $(BASENAME).so
+
+	###############################################################################
+	.PHONY : clean
+	###############################################################################
+	all: $(LIB_A) $(LIB_SO)
+		@echo ' '
+
+	%_static.o:%.c
+		$(CC) -c $(CFLAGS) $(INCPATH) $< -o $@
+
+	%_dynamic.o:%.c
+		$(CC) -c $(CFLAGS) $(INCPATH) $< -o $@ -fPIC
+
+	$(LIB_A): $(STATIC_OBJS)
+		$(AR) rcs $@ $(STATIC_OBJS)
+		@echo 'Finished building: $@'
+
+	$(LIB_SO): $(DYNAMIC_OBJS)
+		$(CC) $(DYNAMIC_OBJS) -shared -o $@
+		@echo 'Finished building: $@'
+	###############################################################################
+	clean:
+		@rm -vfr $(STATIC_OBJS) $(LIB_A) $(DYNAMIC_OBJS) $(LIB_SO)
+	###############################################################################
+snippet CPPLIB
+	###############################################################################
+	# compiler setting
+	###############################################################################
+	CC       = gcc
+	CXX      = g++
+	CFLAGS   = -g -Wall
+	CXXFLAGS = $(CFLAGS) -Weffc++
+	AR       = ar
+	LIBS     = -lm
+	INCPATH  = -I.
+	DIR      = $(shell pwd)
+	BASENAME = $(shell basename $(DIR))
+
+	###############################################################################
+	# source files setting
+	###############################################################################
+	C_SOURCES   	 = $(shell find . -name "*.c")
+	CXX_SOURCES 	 = $(shell find . -name "*.cpp")
+	C_STATIC_OBJS    = $(patsubst %.c,%_static.o,$(wildcard $(C_SOURCES)))
+	CXX_STATIC_OBJS  = $(patsubst %.cpp,%_static.o,$(wildcard $(CXX_SOURCES)))
+	C_DYNAMIC_OBJS   = $(patsubst %.c,%_dynamic.o,$(wildcard $(C_SOURCES)))
+	CXX_DYNAMIC_OBJS = $(patsubst %.cpp,%_dynamic.o,$(wildcard $(CXX_SOURCES)))
+	STATIC_OBJS      = $(C_STATIC_OBJS) $(CXX_STATIC_OBJS)
+	DYNAMIC_OBJS     = $(C_DYNAMIC_OBJS) $(CXX_DYNAMIC_OBJS)
+	LIB_A            = $(BASENAME).a
+	LIB_SO           = $(BASENAME).so
+
+	###############################################################################
+	.PHONY : clean
+	###############################################################################
+	all: $(LIB_A) $(LIB_SO)
+		@echo ' '
+
+	%_static.o:%.c
+		$(CC) -c $(CFLAGS) $(INCPATH) $< -o $@
+	%_static.o:%.cpp
+		$(CXX) -c $(CXXFLAGS) $(INCPATH) $< -o $@
+
+	%_dynamic.o:%.c
+		$(CC) -c $(CFLAGS) $(INCPATH) $< -o $@ -fPIC
+	%_dynamic.o:%.cpp
+		$(CXX) -c $(CXXFLAGS) $(INCPATH) $< -o $@ -fPIC
+
+	$(LIB_A): $(STATIC_OBJS)
+		$(AR) rcs $@ $(STATIC_OBJS)
+		@echo 'Finished building: $@'
+
+	$(LIB_SO): $(DYNAMIC_OBJS)
+		$(CXX) $(DYNAMIC_OBJS) -shared -o $@
+		@echo 'Finished building: $@'
+	###############################################################################
+	clean:
+		@rm -vfr $(STATIC_OBJS) $(LIB_A) $(DYNAMIC_OBJS) $(LIB_SO)
+	###############################################################################
+snippet driver
+	obj-m += main.o
+
+	all:
+		make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules
+
+	clean:
+		make -C /lib/modules/$(shell uname -r)/build M=$(PWD) clean
+snippet gtklib
+	\`pkg-config --libs gtk+-2.0\`
+snippet gtkflag
+	\`pkg-config --cflags gtk+-2.0\`
+snippet QT
+	###############################################################################
+	# compiler setting
+	###############################################################################
+	QMAKE		= qmake
+
+	QMODE		= -project
+	QWARNING	= -Wall
+
+	DIR			= $(shell pwd)
+
+	###############################################################################
+	# source files setting
+	###############################################################################
+	QMAKEFILE	= ./Makefile.QT
+	QPROFILE	= ./tmp.pro
+
+	EXEC		= $(shell basename $(DIR))
+
+	VAR_QT  	= 'QT += widgets'
+	VAR_TARGET	= 'TARGET = $(EXEC)'
+
+	QVAR 		+= $(VAR_QT) $(VAR_TARGET)
+
+	EXEC_PATH	= ./$(EXEC).app/Contents/MacOS/$(EXEC)
+	###############################################################################
+	.PHONY : all clean clean_all
+	###############################################################################
+	all: $(EXEC)
+
+	gen_pro:
+		$(QMAKE) $(QMODE) $(QWARNING) -after $(QVAR) -o $(QPROFILE)
+
+	gen_makefile: gen_pro
+		$(QMAKE) $(QPROFILE) -o $(QMAKEFILE)
+
+	$(EXEC): gen_makefile
+		@make -f $(QMAKEFILE)
+		@ln -svf $(EXEC_PATH) .
+
+	###############################################################################
+	clean:
+		@if [ -f $(QMAKEFILE) ]; then make clean -f $(QMAKEFILE);fi
+		@rm -vfr $(QMAKEFILE) $(QPROFILE)
+
+	clean_all: clean
+		@rm -vfr $(EXEC).app
+		@rm -vf ./$(EXEC)
+	###############################################################################

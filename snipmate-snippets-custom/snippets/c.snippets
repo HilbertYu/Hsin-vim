@@ -1,0 +1,121 @@
+snippet win
+	#ifdef _WIN32 /* Defined for applications for Win32 and Win64. */
+	${1}
+	#endif
+snippet math
+	#ifdef _WIN32
+	#	define _USE_MATH_DEFINES
+	#endif
+snippet co
+	/** ${1} */
+snippet sl
+	/*===========================================================================*/
+snippet dinfo
+	printf("%s @ %s : %d \n", __FUNCTION__,  __FILE__, __LINE__);
+# linux driver
+snippet driver
+	#include <linux/init.h>
+	#include <linux/module.h>
+
+	MODULE_LICENSE("Dual BSD/GPL");
+
+	static int hello_init(void)
+	{
+	    printk(KERN_INFO "Hello, world\n");
+
+	    return 0;
+	}
+
+	static void hello_exit(void)
+	{
+	    printk(KERN_INFO "Goodbye, cruel world\n");
+	}
+
+	module_init(hello_init);
+	module_exit(hello_exit);
+snippet opengl
+	#ifdef __APPLE__
+	#	include <OpenGL/gl.h>
+	#	include <OpenGL/glu.h>
+	#	include <GLUT/glut.h>
+	#else
+	#	ifdef _WIN32
+	#		include <windows.h>
+	#	endif
+	#	include <GL/gl.h>
+	#	include <GL/glu.h>
+	#	include <GL/glut.h>
+	#endif
+snippet ff
+	#ifndef ${1:`'__'.toupper(Filename('', 'UNTITLED')).'_H__'`}
+	#define $1
+
+	${2}
+
+	#endif /* end of $1 */
+snippet cpp
+	#ifdef __cplusplus
+	extern "C" {
+	#endif /* endif __cpluscplus */
+	${1}
+	#ifdef __cplusplus
+	}
+	#endif /* endif __cpluscplus */
+snippet open
+	FILE *$1 = NULL;
+	const char * ${2:file_name} = "${3:data};
+
+	if ((${1:fp} = fopen($2, "${4:r}")) == NULL) {
+		fprintf(stderr, "can't open file ");
+		perror($2);
+		exit(-1);
+	}
+
+	fclose($1);
+snippet measureTime linux
+	struct timeval t_start, t_end;
+	double elapsedTime;
+
+	// start timer
+	gettimeofday(&t_start, NULL);
+
+	// do something
+	// ...
+
+	// stop timer
+	gettimeofday(&t_end, NULL);
+
+	// compute and print the elapsed time in millisec
+	elapsedTime = (t_end.tv_sec - t_start.tv_sec) * 1000.0;      // sec to ms
+	elapsedTime += (t_end.tv_usec - t_start.tv_usec) / 1000.0;   // us to ms
+	printf("%f ms.\n",elapsedTime);
+
+snippet measureTime windows
+	LARGE_INTEGER frequency;        // ticks per second
+	LARGE_INTEGER t_start, t_end;   // ticks
+	double elapsedTime;
+
+	// get ticks per second
+	QueryPerformanceFrequency(&frequency);
+
+	// start timer
+	QueryPerformanceCounter(&t_start);
+
+	// do something
+	// ...
+
+	// stop timer
+	QueryPerformanceCounter(&t_end);
+
+	// compute and print the elapsed time in millisec
+	elapsedTime = (t_end.QuadPart - t_start.QuadPart) * 1000.0 / frequency.QuadPart;
+	printf("%f ms.\n",elapsedTime);
+
+snippet hello
+	#include <stdio.h>
+
+	int main(int argc, const char * argv[])
+	{
+		printf("Hello\n");
+		return 0;
+	}
