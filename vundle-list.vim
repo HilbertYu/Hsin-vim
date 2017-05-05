@@ -30,6 +30,7 @@ Plugin 'Lokaltog/vim-powerline'
 " vim-scripts repos
 Plugin 'a.vim'
 Plugin 'grep.vim'
+Plugin 'surround.vim'
 "..................................
 " non github repos
 " Plugin 'git://git.wincent.com/command-t.git'
