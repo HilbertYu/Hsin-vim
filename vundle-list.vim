@@ -26,6 +26,7 @@ Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
 Plugin 'nathanaelkane/vim-indent-guides.git'
 Plugin 'Lokaltog/vim-powerline'
+Plugin 'Valloric/YouCompleteMe'
 
 " vim-scripts repos
 Plugin 'a.vim'

@@ -54,10 +54,13 @@ let g:syntastic_error_symbol = '✗'
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 1
-" let g:syntastic_check_on_open = 1
-" let g:syntastic_check_on_wq = 1
+
+"  let g:syntastic_always_populate_loc_list = 1
+"  let g:syntastic_auto_loc_list = 1
+"  let g:syntastic_check_on_open = 1
+"  let g:syntastic_check_on_wq = 1
+
+
 
 "nerdtree
 source $HOME/.vim/hsinsetting/nerdtree.vim
@@ -71,17 +74,42 @@ source $HOME/.vim/hsinsetting/omnicppcomplete.vim
 "let g:asyncrun_mode = 1
 cnoreabbrev ctags_add  AsyncRun! ctags -R --c++-kinds=+p --fields=+iaS --extra=+q
 "cnoreabbrev Ack  AsyncRun! ack <cword><CR>:botright copen 8<CR>
-cnoreabbrev Agc Ag! <C-R><C-W> ./*.c
+cnoreabbrev Agc Ag! <C-R><C-W> -G="*.[ch]" <CR>
 
 
 "snipmate custom
 set runtimepath+=~/.vim/snipmate-snippets-custom/
 
 highlight Visual cterm=NONE ctermbg=Blue ctermfg=Cyan guibg=Grey41
-nmap <F12> :w<CR>:make!<CR>:cw<CR> 
+nmap <F12> :w<CR>:make!<CR>:cw<CR>
 "nmap <F12> :w<CR>:AsyncRun make<CR>:botright copen 8<CR>
 
 
 "let g:ycm_path_to_python_interpreter = '/Users/fresh/anaconda/bin/python'
 
 inoremap jk <ESC>
+vmap <F7> !indent <CR>
+
+"let g:syntastic_c_check_header = 0
+let g:syntastic_c_remove_include_errors = 1
+
+
+
+"YouCompleteMe
+set runtimepath+=~/.vim/bundle/YouCompleteMe
+let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_collect_identifiers_from_comments_and_strings = 1
+let g:syntastic_ignore_files=[".*\.py$"]
+let g:ycm_seed_identifiers_with_syntax = 1
+let g:ycm_complete_in_comments = 1
+let g:ycm_confirm_extra_conf = 0
+let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
+let g:ycm_complete_in_comments = 1
+let g:ycm_complete_in_strings = 1
+let g:ycm_collect_identifiers_from_comments_and_strings = 1
+let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+let g:ycm_show_diagnostics_ui = 0
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>" |
+nnoremap <c-j> :YcmCompleter GoToDefinitionElseDeclaration<CR>|
+"let g:ycm_min_num_of_chars_for_completion=2
