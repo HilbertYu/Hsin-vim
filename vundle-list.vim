@@ -27,6 +27,8 @@ Plugin 'honza/vim-snippets'
 Plugin 'nathanaelkane/vim-indent-guides.git'
 Plugin 'Lokaltog/vim-powerline'
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'kien/ctrlp.vim'
+Plugin 'tacahiroy/ctrlp-funky.git'
 
 " vim-scripts repos
 Plugin 'a.vim'

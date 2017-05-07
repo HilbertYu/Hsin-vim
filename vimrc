@@ -113,3 +113,19 @@ let g:ycm_show_diagnostics_ui = 0
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>" |
 nnoremap <c-j> :YcmCompleter GoToDefinitionElseDeclaration<CR>|
 "let g:ycm_min_num_of_chars_for_completion=2
+"
+"
+
+"CTRLP
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.o,*.a,*/CVS/*
+let g:ctrlp_custom_ignore = {
+    \ 'dir':  '\v[\/]\.(git|hg|svn|)$',
+    \ 'file': '\v\.(exe|so|dll)$',
+    \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
+    \ }
+
+nnoremap <Leader>fu :CtrlPFunky<Cr>
+" narrow the list down with a word under cursor
+nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
+let g:ctrlp_funky_matchtype = 'path'
+let g:ctrlp_funky_syntax_highlight = 1
