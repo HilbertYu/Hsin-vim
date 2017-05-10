@@ -30,3 +30,20 @@
 1. [Build vim]
 2. sudo apt install vim-youcompleteme
 3. install in vundle/YouCompleteMe/install.py
+
+#### troubleshoot ####
+```
+importerror: dlopen(/usr/local/cellar/python/2.7.13/frameworks/python.framework/versions/2.7/lib/python2.7/lib-dynload/_io.so, 2): symbol not found: __pycodecinfo_getincrementaldecoder referenced
+```
+
+* find _io.so
+
+```
+sudo find / -name _io.so
+```
+* replace the older lib to the new one.
+
+```
+/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/lib-dynload/_io.so /usr/local/Cellar/python/2.7.13/Frameworks/Python.framework/Versions/2.7/lib/python2.7/lib-dynload/_io.so
+```
+
