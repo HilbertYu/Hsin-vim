@@ -26,7 +26,7 @@
 
 
 
-## YMC ##
+## YCM ##
 1. [Build vim]
 2. sudo apt install vim-youcompleteme
 3. install in vundle/YouCompleteMe/install.py
