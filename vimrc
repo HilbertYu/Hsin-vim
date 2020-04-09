@@ -90,6 +90,7 @@ nmap <F12> :NERDTree<CR>
 
 inoremap jk <ESC>
 vmap <F7> !indent <CR>
+map <F4> :call CurtineIncSw()<CR>
 
 "let g:syntastic_c_check_header = 0
 let g:syntastic_c_remove_include_errors = 1
@@ -138,3 +139,9 @@ let g:ctrlp_funky_matchtype = 'path'
 let g:ctrlp_funky_syntax_highlight = 1
 
 autocmd BufEnter *.py :SyntasticToggleMode
+
+
+"========== ue4 ===========
+set path+=/Users/fresh/opt/Epic-Games/UE_4.24/Engine/Source/Runtime/Engine/Classes
+set path+=/Users/fresh/opt/Epic-Games/UE_4.24/Engine/Source/Runtime/Core/Public
+set path+=/Users/fresh/opt/Epic-Games/UE_4.24/Engine/Source/Runtime/Core/Private

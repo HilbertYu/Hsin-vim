@@ -20,6 +20,7 @@ Plugin 'majutsushi/tagbar.git'
 Plugin 'tomtom/tcomment_vim.git'
 Plugin 'tomtom/tlib_vim.git'
 Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'ericcurtin/CurtineIncSw.vim'
 
 Plugin 'airblade/vim-gitgutter.git'
 Plugin 'garbas/vim-snipmate'
