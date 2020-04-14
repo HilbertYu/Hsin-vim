@@ -10,6 +10,11 @@
 
 
 ## Build vim ##
+* sudo apt-get install libncurses5-dev libncursesw5-dev
+* sudo apt-get install python-dev libxml2-dev libxslt-dev
+* sudo apt-get install ctgs
+* sudo apt-get install cscope
+
 1. git clone https://github.com/vim/vim.git
 
 2. ./configure --with-features=huge \
@@ -27,6 +32,8 @@
 
 
 ## YCM ##
+* sudo apt install cmake
+
 1. [Build vim]
 2. sudo apt install vim-youcompleteme
 3. install in vundle/YouCompleteMe/install.py
