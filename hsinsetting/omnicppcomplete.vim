@@ -1,4 +1,7 @@
 set tags+=$HOME/.vim/tags/stl_tags
+set tags+=/usr/local/Cellar/ffmpeg/3.3.2/include/tags
+set tags+=tags,./tags
+"set tags+=$HOME/.vim/tags/ffmpeg_tags
 let OmniCpp_DefaultNamespaces = ["_GLIBCXX_STD"]
 let OmniCpp_NamespaceSearch = 1
 let OmniCpp_GlobalScopeSearch = 1

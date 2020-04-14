@@ -81,9 +81,11 @@ cnoreabbrev Agc Ag! <C-R><C-W> -G="*.[ch]" <CR>
 set runtimepath+=~/.vim/snipmate-snippets-custom/
 
 highlight Visual cterm=NONE ctermbg=Blue ctermfg=Cyan guibg=Grey41
-nmap <F12> :w<CR>:make!<CR>:cw<CR>
+nmap <F5> :w<CR>:make!<CR>:cw<CR><CR>
+map <F4> :call CurtineIncSw()<CR>
 "nmap <F12> :w<CR>:AsyncRun make<CR>:botright copen 8<CR>
 
+nmap <F12> :NERDTree<CR>
 
 "let g:ycm_path_to_python_interpreter = '/Users/fresh/anaconda/bin/python'
 
@@ -97,6 +99,8 @@ let g:syntastic_c_remove_include_errors = 1
 
 "YouCompleteMe
 set runtimepath+=~/.vim/bundle/YouCompleteMe
+" let g:ycm_path_to_python_interpreter = '/usr/bin/python'
+" let g:ycm_path_to_python_interpreter = '/Users/fresh/anaconda/bin/python'
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
 let g:syntastic_ignore_files=[".*\.py$"]
@@ -112,9 +116,12 @@ let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/third_party/ycmd/cp
 let g:ycm_show_diagnostics_ui = 0
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>" |
 nnoremap <c-j> :YcmCompleter GoToDefinitionElseDeclaration<CR>|
-"let g:ycm_min_num_of_chars_for_completion=2
+let g:ycm_min_num_of_chars_for_completion=2
 "
 "
+"
+
+let g:NERDTreeWinPos = "left"
 
 "CTRLP
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.o,*.a,*/CVS/*
@@ -129,3 +136,12 @@ nnoremap <Leader>fu :CtrlPFunky<Cr>
 nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
 let g:ctrlp_funky_matchtype = 'path'
 let g:ctrlp_funky_syntax_highlight = 1
+
+autocmd BufEnter *.py :SyntasticToggleMode
+"
+" set cscopetag 
+" set cscopeprg='gtags-cscope'
+"
+" let GtagsCscope_Auto_Load = 1
+" let CtagsCscope_Auto_Map = 1
+" let GtagsCscope_Quiet = 1
