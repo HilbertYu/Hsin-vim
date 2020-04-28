@@ -1,0 +1,25 @@
+snippet CPP
+	cmake_minimum_required(VERSION 3.0)
+
+	PROJECT(pro)
+	set(EXEC exec_name)
+
+	#set(CMAKE_VERBOSE_MAKEFILE ON)
+
+	set(CMAKE_OSX_SYSROOT "")
+	set(CMAKE_CXX_FLAGS "")
+	set(CMAKE_CFLAGS "")
+	set(CMAKE_CXX_FLAGS "-g -std=c++14 -Wparentheses")
+	set(CMAKE_CXX_COMPILER  "g++" )
+
+	add_compile_options("-Wall")
+	add_compile_options("-O3")
+
+	include_directories(.)
+
+	file(GLOB CPP_SRC
+		"*.cpp"
+		)
+
+	set (EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR})
+	add_executable(${EXEC} ${CPP_SRC})

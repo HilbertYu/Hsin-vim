@@ -260,3 +260,36 @@ snippet QT
 		@rm -vfr $(EXEC).app
 		@rm -vf ./$(EXEC)
 	###############################################################################
+
+snippet CMAKE_CPP
+	CC       = gcc
+	CXX      = g++
+	SRC_DIR := $(shell pwd)
+
+	CMK_BUILD_DIR = /tmp/alg_la_build
+
+	###############################################################################
+	# source files setting
+	###############################################################################
+	EXEC      = exec
+
+	###############################################################################
+	.PHONY : all clean clean_all
+	###############################################################################
+	all: $(EXEC)
+		@make -j5 -C $(CMK_BUILD_DIR)
+
+	$(EXEC): $(CMK_BUILD_DIR)/Makefile
+
+	$(CMK_BUILD_DIR)/Makefile: CMakeLists.txt
+		@mkdir -p $(CMK_BUILD_DIR)
+		@cd $(CMK_BUILD_DIR) && cmake $(SRC_DIR)
+
+	###############################################################################
+	clean:
+		@make clean -C $(CMK_BUILD_DIR)
+
+	clean_all: clean
+		@rm -vfr $(EXEC)
+		@rm -vfr $(CMK_BUILD_DIR)
+	###############################################################################
