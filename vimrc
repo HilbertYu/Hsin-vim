@@ -141,6 +141,8 @@ let g:ctrlp_funky_syntax_highlight = 1
 autocmd BufEnter *.py :SyntasticToggleMode
 
 
+let g:syntastic_cpp_config_file = '.syntastic_cpp_config'
+
 "========== ue4 ===========
 set path+=/Users/fresh/opt/Epic-Games/UE_4.24/Engine/Source/Runtime/Engine/Classes
 set path+=/Users/fresh/opt/Epic-Games/UE_4.24/Engine/Source/Runtime/Core/Public
